@@ -29,7 +29,7 @@ def load_and_preprocess_data():
 
 
 def load_preprocessed_data():
-    if os.path.isfile("preprocessedTestData.p") is True and False:
+    if os.path.isfile("preprocessedTestData.p") is True:
         with open("preprocessedTestData.p", "rb") as input_file:
             return pickle.load(input_file)
     else:

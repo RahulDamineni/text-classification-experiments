@@ -1,5 +1,5 @@
 from keras.layers import Conv1D, MaxPooling1D, Dense
-from keras.layers import Embedding, Input, Flatten
+from keras.layers import Embedding, Input, Flatten, Dropout
 from keras.models import Model
 from data import load_preprocessed_data
 
@@ -23,7 +23,8 @@ if __name__ == "__main__":
     pool3 = MaxPooling1D(pool_size=35)(conv3)
 
     flattened = Flatten()(pool3)
-    fully_connected = Dense(32, activation="relu")(flattened)
+    dropout = Dropout(rate=0.5)(flattened)
+    fully_connected = Dense(32, activation="relu")(dropout)
     output = Dense(1, activation="sigmoid")(fully_connected)
 
     model = Model(inputs=input, outputs=output)
@@ -36,5 +37,10 @@ if __name__ == "__main__":
               epochs=3, validation_split=0.15)
 
 
+# Without dropout
 # 21250/21250 [==============================] - 181s - loss: 0.2051 -
 # acc: 0.9196 - val_loss: 0.2955 - val_acc: 0.8819
+
+# With dropout
+# 21250/21250 [==============================] - 183s - loss: 0.2267
+# acc: 0.9129 - val_loss: 0.3761 - val_acc: 0.8539
