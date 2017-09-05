@@ -1,15 +1,15 @@
 from data import load_preprocessed_data
-from keras.layers import LSTM, Bidirectional, Dense, SimpleRNN
+from keras.layers import LSTM, Bidirectional, Dense
 from keras.layers import Embedding, Input, Dropout
 from keras.models import Model
 
 INPUT_DIM = 22000
-SENT_LEN = 100
+SENT_LEN = 1000
 EMBD_DIM = 128
 
 
 if __name__ == "__main__":
-    inputs_, outputs_ = load_preprocessed_data()
+    inputs_, outputs_ = load_preprocessed_data(sequence_length=SENT_LEN)
 
     inputs = Input(shape=(SENT_LEN,), dtype="int32")
     embeddings = Embedding(input_dim=INPUT_DIM, output_dim=EMBD_DIM,
@@ -41,3 +41,24 @@ if __name__ == "__main__":
 # Epoch 3/3
 # 20000/20000 [==============================] - 131s - loss: 0.1092 -
 # acc: 0.9625 - val_loss: 0.4861 - val_acc: 0.8422
+
+# DROPOUT
+# ADAM optimizer with input sequence_length increased to 500 [Acc improved]
+# Epoch 2/3
+# 20000/20000 [==============================] - 614s - loss: 0.2401 -
+# acc: 0.9098 - val_loss: 0.3121 - val_acc: 0.8734
+# Epoch 3/
+# 20000/20000 [==============================] - 608s - loss: 0.1540 -
+# acc: 0.9460 - val_loss: 0.3350 - val_acc: 0.8696
+
+# DROPOUT
+# ADAM optimizer with input sequence_length increased to 1000 [Acc improved]
+# Epoch 2/3
+# 20000/20000 [==============================] - 1244s - loss: 0.2193
+# - acc: 0.9190 - val_loss: 0.3382 - val_acc: 0.8524
+# Epoch 3/3
+# 20000/20000 [==============================] - 1234s - loss: 0.1317
+# - acc: 0.9552 - val_loss: 0.3429 - val_acc: 0.8656
+
+# CONCLUSION: Average review length is about 229, so 100 is losing a lot
+# of info, likewise 500-1000 doesn't have much info gain. So accuracy is same.

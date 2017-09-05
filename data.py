@@ -12,7 +12,7 @@ EMB_DIM = 100
 MAX_FET = 22000
 
 
-def load_and_preprocess_data():
+def load_and_preprocess_data(sequence_length=SEQ_LEN):
     with open("/Users/dsp/Documents/AllProjects/Personal/LearningKeras/old_data/testData.p", "rb") as data_file:
         reviews, lables = pickle.load(data_file)
 
@@ -20,21 +20,24 @@ def load_and_preprocess_data():
     tokenizer.fit_on_texts(reviews)
 
     reviews_sequences = tokenizer.texts_to_sequences(reviews)
-    reviews_sequences = pad_sequences(reviews_sequences, maxlen=SEQ_LEN)
+    reviews_sequences = pad_sequences(reviews_sequences, maxlen=sequence_length)
 
-    with open("preprocessedTestData.p", "wb+") as data_out:
+    _file_name = "preprocessedTestData" + str(sequence_length) + ".p"
+    with open(_file_name, "wb +") as data_out:
         pickle.dump([reviews_sequences, np.array(lables)], data_out)
 
     return [reviews_sequences, np.array(lables)]
 
 
-def load_preprocessed_data():
-    if os.path.isfile("preprocessedTestData.p") is True:
-        with open("preprocessedTestData.p", "rb") as input_file:
+def load_preprocessed_data(sequence_length=SEQ_LEN):
+    _file_name = "preprocessedTestData" + str(sequence_length) + ".p"
+
+    if os.path.isfile(_file_name) is True:
+        with open(_file_name, "rb") as input_file:
             return pickle.load(input_file)
     else:
-        return load_and_preprocess_data()
+        return load_and_preprocess_data(sequence_length=sequence_length)
 
 
 if __name__ == "__main__":
-    load_preprocessed_data()
+    load_preprocessed_data(sequence_length=500)

@@ -11,7 +11,7 @@ from keras.models import Model
 
 
 INPUT_DIM = 22000
-SENT_LEN = 100
+SENT_LEN = 500
 EMBD_DIM = 128
 
 
@@ -40,11 +40,11 @@ class AttLayer(Layer):
 
 
 if __name__ == "__main__":
-    inputs_, outputs_ = load_preprocessed_data()
+    inputs_, outputs_ = load_preprocessed_data(sequence_length=SENT_LEN)
 
     inputs = Input(shape=(SENT_LEN,), dtype="int32")
     embeddings = Embedding(input_dim=INPUT_DIM, output_dim=EMBD_DIM,
-                           input_length=SENT_LEN)(inputs)
+                           input_length=SENT_LEN, trainable=True)(inputs)
     lstm1 = Bidirectional(LSTM(units=64, return_sequences=True))(embeddings)
     dropout = Dropout(0.35)(lstm1)
     attention = AttLayer()(dropout)
