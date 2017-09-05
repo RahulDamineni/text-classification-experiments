@@ -46,8 +46,8 @@ if __name__ == "__main__":
     embeddings = Embedding(input_dim=INPUT_DIM, output_dim=EMBD_DIM,
                            input_length=SENT_LEN)(inputs)
     lstm1 = Bidirectional(LSTM(units=64, return_sequences=True))(embeddings)
-    attention = AttLayer()(lstm1)
-    # dropout = Dropout(0.35)(lstm1)
+    dropout = Dropout(0.35)(lstm1)
+    attention = AttLayer()(dropout)
     outputs = Dense(1, activation="sigmoid")(attention)
 
     model = Model(inputs=inputs, outputs=outputs)
@@ -57,3 +57,20 @@ if __name__ == "__main__":
                   metrics=["accuracy"])
     model.fit(x=inputs_, y=outputs_, validation_split=0.20, batch_size=64,
               epochs=3)
+
+
+# ADAM without dropout
+# Epoch 2/3
+# 20000/20000 [==============================] - 99s - loss: 0.2165 -
+#  acc: 0.9174 - val_loss: 0.3957 - val_acc: 0.8442
+# Epoch 3/3
+# 20000/20000 [==============================] - 99s - loss: 0.1188 -
+# acc: 0.9584 - val_loss: 0.4537 - val_acc: 0.8186
+
+# ADAM with dropout of 35%
+# Epoch 2/3
+# 20000/20000 [==============================] - 104s - loss: 0.2144
+# - acc: 0.9153 - val_loss: 0.3618 - val_acc: 0.8440
+# Epoch 3/3
+# 20000/20000 [==============================] - 105s - loss: 0.1222
+# - acc: 0.9564 - val_loss: 0.4702 - val_acc: 0.8216
