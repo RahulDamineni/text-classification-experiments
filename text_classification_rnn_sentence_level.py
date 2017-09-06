@@ -4,8 +4,8 @@ from keras.models import Model
 from data_3d import load_preprocessed_data
 
 
-SENT_LEN = 100
-NUM_SENT = 5
+SENT_LEN = 50
+NUM_SENT = 20
 EMBD_DIM = 100
 INP_DIM = 22000
 
@@ -37,7 +37,8 @@ if __name__ == "__main__":
     hierarchial_model.compile(loss="binary_crossentropy", optimizer="adam",
                               metrics=["accuracy"])
 
-    reviews, labels = load_preprocessed_data()
+    reviews, labels = load_preprocessed_data(sequence_length=SENT_LEN,
+                                             num_sent=NUM_SENT)
     hierarchial_model.fit(x=reviews, y=labels, epochs=3, validation_split=0.2)
 
 # Analysis on dataset revealed average number of sentences per review is 14
