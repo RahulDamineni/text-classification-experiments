@@ -37,7 +37,7 @@ if __name__ == "__main__":
     hierarchial_model.compile(loss="binary_crossentropy", optimizer="adam",
                               metrics=["accuracy"])
 
-    reviews, labels = load_preprocessed_data(sequence_length=SENT_LEN,
+    reviews, labels = load_preprocessed_data(sent_len=SENT_LEN,
                                              num_sent=NUM_SENT)
     hierarchial_model.fit(x=reviews, y=labels, epochs=3, validation_split=0.2)
 
