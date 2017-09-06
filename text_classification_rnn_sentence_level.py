@@ -39,7 +39,7 @@ if __name__ == "__main__":
 
     reviews, labels = load_preprocessed_data(sent_len=SENT_LEN,
                                              num_sent=NUM_SENT)
-    hierarchial_model.fit(x=reviews, y=labels, epochs=3, validation_split=0.2)
+    hierarchial_model.fit(x=reviews, y=labels, epochs=3, validation_split=0.2, batch_size=128)
 
 # Analysis on dataset revealed average number of sentences per review is 14
 # ADAM with only 64 LSTM cells and input of (5, 100)
@@ -49,3 +49,27 @@ if __name__ == "__main__":
 # Epoch 3/3
 # 20000/20000 [==============================] - 363s - loss: 0.1402
 #  - acc: 0.9482 - val_loss: 0.5134 - val_acc: 0.8156
+
+# ADAM with only 64 LSTM cells and input (20, 50)
+# Epoch 2/3
+# 20000/20000 [==============================] - 739s - loss: 0.1829 -
+# acc: 0.9338 - val_loss: 0.2939 - val_acc: 0.8838
+# Epoch 3/3
+# 20000/20000 [==============================] - 746s - loss: 0.0996 -
+# acc: 0.9668 - val_loss: 0.3442 - val_acc: 0.8796
+
+# ADAM with 100 LSTM cells and input (20, 50)
+# Epoch 2/3
+# 20000/20000 [==============================] - 1233s - loss: 0.1909 -
+#  acc: 0.9289 - val_loss: 0.3133 - val_acc: 0.8804
+# Epoch 3/3
+# 20000/20000 [==============================] - 1225s - loss: 0.0948 -
+#  acc: 0.9670 - val_loss: 0.3576 - val_acc: 0.8828
+
+# ADAM with 300 LSTM cells and input (20, 20) Trainable params: 5,344,065
+# Epoch 2/3
+# 20000/20000 [==============================] - 1604s - loss: 0.2029 -
+# acc: 0.9227 - val_loss: 0.3085 - val_acc: 0.8712
+# Epoch 3/3
+# 20000/20000 [==============================] - 1526s - loss: 0.1091 -
+# acc: 0.9623 - val_loss: 0.3854 - val_acc: 0.8662
