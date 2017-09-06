@@ -74,3 +74,6 @@ if __name__ == "__main__":
 # Epoch 3/3
 # 20000/20000 [==============================] - 105s - loss: 0.1222
 # - acc: 0.9564 - val_loss: 0.4702 - val_acc: 0.8216
+
+# ADAM optimizer without dropout
+# val_acc 87.7% and 87.4% for 2nd and 3rd epochs

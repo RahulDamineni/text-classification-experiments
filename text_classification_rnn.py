@@ -51,6 +51,14 @@ if __name__ == "__main__":
 # 20000/20000 [==============================] - 608s - loss: 0.1540 -
 # acc: 0.9460 - val_loss: 0.3350 - val_acc: 0.8696
 
+# ADAM without dropout and sequence_length increased to 500 from 100
+# Epoch 2/3
+# 20000/20000 [==============================] - 414s - loss: 0.2420
+#  - acc: 0.9062 - val_loss: 0.3212 - val_acc: 0.8718
+# Epoch 3/3
+# 20000/20000 [==============================] - 415s - loss: 0.1409
+#  - acc: 0.9512 - val_loss: 0.3528 - val_acc: 0.8666
+
 # DROPOUT
 # ADAM optimizer with input sequence_length increased to 1000 [Acc improved]
 # Epoch 2/3
