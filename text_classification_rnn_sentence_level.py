@@ -1,4 +1,4 @@
-from keras.layers import LSTM, Bidirectional, Dense, TimeDistributed
+from keras.layers import GRU, Bidirectional, Dense, TimeDistributed
 from keras.layers import Embedding, Input, Flatten
 from keras.models import Model
 from data_3d import load_preprocessed_data
@@ -20,14 +20,14 @@ if __name__ == "__main__":
     sentence_input = Input(shape=(SENT_LEN,))
     embeddings = Embedding(input_dim=INP_DIM, output_dim=EMBD_DIM,
                            input_length=SENT_LEN)(sentence_input)
-    sentence_encoded = Bidirectional(LSTM(64))(embeddings)
+    sentence_encoded = Bidirectional(GRU(100))(embeddings)
     sentence_encoder_model = Model(inputs=sentence_input,
                                    outputs=sentence_encoded)
 
     # Document encoder
     document_input = Input(shape=(NUM_SENT, SENT_LEN))
     sentences_encoded = TimeDistributed(sentence_encoder_model)(document_input)
-    document_encoded = Bidirectional(LSTM(64))(sentences_encoded)
+    document_encoded = Bidirectional(GRU(100))(sentences_encoded)
 
     fully_connected = Dense(32, activation="relu")(document_encoded)
     outputs_ = Dense(1, activation="sigmoid")(fully_connected)
@@ -39,7 +39,7 @@ if __name__ == "__main__":
 
     reviews, labels = load_preprocessed_data(sent_len=SENT_LEN,
                                              num_sent=NUM_SENT)
-    hierarchial_model.fit(x=reviews, y=labels, epochs=3, validation_split=0.2, batch_size=128)
+    hierarchial_model.fit(x=reviews, y=labels, epochs=3, validation_split=0.2)
 
 # Analysis on dataset revealed average number of sentences per review is 14
 # ADAM with only 64 LSTM cells and input of (5, 100)
@@ -73,3 +73,11 @@ if __name__ == "__main__":
 # Epoch 3/3
 # 20000/20000 [==============================] - 1526s - loss: 0.1091 -
 # acc: 0.9623 - val_loss: 0.3854 - val_acc: 0.8662
+
+# ADAM with 100 GRU cells and input (20, 50)
+# Epoch 2/3
+# 20000/20000 [==============================] - 871s - loss: 0.1702 -
+# acc: 0.9355 - val_loss: 0.2828 - val_acc: 0.8862
+# Epoch 3/3
+# 20000/20000 [==============================] - 854s - loss: 0.0754 -
+# acc: 0.9742 - val_loss: 0.3748 - val_acc: 0.8816

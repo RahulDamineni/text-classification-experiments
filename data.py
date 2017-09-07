@@ -3,9 +3,6 @@ import pickle
 import numpy as np
 from keras.preprocessing.sequence import pad_sequences
 from keras.preprocessing.text import Tokenizer
-from keras.layers import Conv1D, MaxPooling1D, Dense
-from keras.layers import Embedding, Input, Flatten
-from keras.models import Model
 
 SEQ_LEN = 100
 EMB_DIM = 100
