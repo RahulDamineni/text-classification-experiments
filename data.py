@@ -33,9 +33,11 @@ def load_preprocessed_data(sequence_length=SEQ_LEN):
     _file_name = "preprocessedTestData" + str(sequence_length) + ".p"
 
     if os.path.isfile(_file_name) is True:
+        print "Loading data..."
         with open(_file_name, "rb") as input_file:
             return pickle.load(input_file)
     else:
+        print "Preparing and loading data, this may take a while..."
         return load_and_preprocess_data(sequence_length=sequence_length)
 
 

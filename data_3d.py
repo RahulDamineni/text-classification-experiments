@@ -79,9 +79,11 @@ def load_preprocessed_data(sent_len=SENT_LEN, num_sent=NUM_SENT):
                                           + "_" + str(NUM_SENT) + ".p"
 
     if os.path.isfile(_file_name) is True:
+        print "Loading data..."
         with open(_file_name, "rb") as input_file:
             return pickle.load(input_file)
     else:
+        print "Preparing and loading data, this may take a while..."
         return load_and_preprocess_data(sent_len=sent_len, num_sent=num_sent)
 
 
