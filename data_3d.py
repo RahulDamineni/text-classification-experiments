@@ -40,8 +40,14 @@ def splitlines_smart(string_in):
 
 
 def load_and_preprocess_data(sent_len=SENT_LEN, num_sent=NUM_SENT):
-    with open("/Users/dsp/Documents/AllProjects/Personal/LearningKeras/old_data/testData.p", "rb") as data_file:
-        reviews, lables = pickle.load(data_file)
+
+    local_file_path = "/Users/dsp/Documents/AllProjects/Personal/LearningKeras/old_data/testData.p"
+    if os.path.isfile(local_file_path):
+        with open(local_file_path, "rb") as data_file:
+            reviews, lables = pickle.load(data_file)
+    else:
+        with open("testData.p", "rb") as data_file:
+            reviews, lables = pickle.load(data_file)
 
     reviews_mask_shape = (len(reviews), num_sent, sent_len)
     reviews_mask = np.zeros(reviews_mask_shape, dtype=np.int32)
