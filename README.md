@@ -27,6 +27,13 @@ Used 25k reviews from standard IMDB dataset on various models to predict if a gi
 |**RNN_simple_att**|No|(20000, 500)|84.42%|99s|`ADAM`|`word_level`|`None`|
 |**RNN_simple_att**|Yes|(20000, 500)|84.40%|101s|`ADAM`|`word_level`|`None`|
 |**RNN_hier_noatt**|No|(20000, 5, 100)|81.80%|375s|`ADAM`|`None`|`5X100`|`LSTM-64`|
+|**RNN_hier_noatt**|No|(20000, 20, 50)|88.38%|739s|`ADAM`|`None`|`20X50`|`LSTM-64`|
+|**RNN_hier_noatt**|No|(20000, 20, 50)|88.04%|1233s|`ADAM`|`None`|`20X50`|`LSTM-100`|
+|**RNN_hier_noatt**|No|(20000, 20, 50)|88.62%|854s|`ADAM`|`None`|`20X50`|`GRU-100`|
+|**RNN_hier_noatt**|No|(20000, 20, 20)|87.12%|1604s|`ADAM`|`None`|`20X20`|`LSTM-300`|
+|**RNN_hier_att**|No|(20000, 20, 50)|89.52%|1258s|`ADAM`|`sentence_level`|`20X50`|`GRU-100`|
+|**RNN_hier_att**|No|(20000, 20, 50)|88.54%|1473s|`ADAM`|`sentence_level`|`20X50`|`LSTM-100`|
+
 
 
 
