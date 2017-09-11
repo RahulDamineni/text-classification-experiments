@@ -35,6 +35,10 @@ Used 25k reviews from standard IMDB dataset on various models to predict if a gi
 |**RNN_hier_att**|No|(20000, 20, 50)|**88.54%**|1473s|`ADAM`|`sentence_level`|`20X50`|`LSTM-100`|
 
 
+## TODO
+
+Poke and see what the model is actually learning. I hope it is something wonderful! 
+
 
 
 
