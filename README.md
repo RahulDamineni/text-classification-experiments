@@ -14,8 +14,8 @@ Used 25k reviews from standard IMDB dataset on various models to predict if a gi
 
 ## Results
 
-|Model|Dropout|Input Sequence Dims.|Best Validation Accuracy|Time To Train|Optimizer|Attention|Hierarchy|
-|:---:|:-----:|:------------------:|:----------------------:|:-----------:|:-------:|:-------:|:-------:|
+|Model|Dropout|Input Sequence Dims.|Best Validation Accuracy|Time To Train|Optimizer|Attention|Hierarchy|Memory-Dims.|
+|:---:|:-----:|:------------------:|:----------------------:|:-----------:|:-------:|:-------:|:-------:|:----------:|
 |**1Dconv_simple_noatt**|No|(21250, 1000)|88.19%|181s|`rmsprop`|`None`|`None`|
 |**1Dconv_simple_noatt**|Yes|(21250, 1000)|85.39%|183s|`rmsprop`|`None`|`None`|
 |**RNN_simple_noatt**|No|(21250,100)|85.79%|287s|`rmsprop`|`None`|`None`|
@@ -25,7 +25,8 @@ Used 25k reviews from standard IMDB dataset on various models to predict if a gi
 |**RNN_simple_noatt**|Yes|(20000,500)|87.34%|608s|`ADAM`|`None`|`None`|
 |**RNN_simple_noatt**|Yes|(20000,1000)|86.56%|1234s|`ADAM`|`None`|`None`|
 |**RNN_simple_att**|No|(20000, 500)|84.42%|99s|`ADAM`|`word_level`|`None`|
-|**RNN_simple_att**|Yes|(20000, 500)|84.40%|99s|`ADAM`|`word_level`|`None`|
+|**RNN_simple_att**|Yes|(20000, 500)|84.40%|101s|`ADAM`|`word_level`|`None`|
+|**RNN_hier_noatt**|No|(20000, 5, 100)|81.80%|375s|`ADAM`|`None`|`5X100`|`LSTM-64`|
 
 
 
