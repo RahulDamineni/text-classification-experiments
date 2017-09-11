@@ -24,6 +24,10 @@ Used 25k reviews from standard IMDB dataset on various models to predict if a gi
 |**RNN_simple_noatt**|No|(20000,500)|87.18%|415s|`ADAM`|`None`|`None`|
 |**RNN_simple_noatt**|Yes|(20000,500)|87.34%|608s|`ADAM`|`None`|`None`|
 |**RNN_simple_noatt**|Yes|(20000,1000)|86.56%|1234s|`ADAM`|`None`|`None`|
+|**RNN_simple_att**|No|(20000, 500)|84.42%|99s|`ADAM`|`word_level`|`None`|
+|**RNN_simple_att**|Yes|(20000, 500)|84.40%|99s|`ADAM`|`word_level`|`None`|
+
+
 
 
 
